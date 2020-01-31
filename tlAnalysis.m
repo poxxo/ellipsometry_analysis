@@ -103,6 +103,9 @@ for i = 1:(Nlayer - 1)
     %cosTrans(:, :, i + 1) = signumUp(-imag(sqrt(1 - (transpose(sind(theta))*(n(1, :)./n(i + 1, :))).^2))) .* sqrt(1 - (transpose(sind(theta))*(n(1, :)./n(i + 1, :))).^2);
     cosTrans(:, :, i + 1) = sqrt(1 - (transpose(sind(theta))*(n(1, :)./n(i + 1, :))).^2);
 end
+
+% All layers are implicitly assumed to consist of non-magnetic materials (relative permeability = 1).
+% If this is not the case, n should be replaced with the reciprocal of the wave impedance sqrt(mu_r/epsilon_r).
 n = repmat(permute(n, [3, 2, 1]), Ntheta, 1, 1);
 
 % Propagation constants
